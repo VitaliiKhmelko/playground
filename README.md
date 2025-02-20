@@ -2,13 +2,26 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.1.
 
-## Development server
+## Infrastructure as Code
 
-To start a local development server, run:
+Install Terraform on your machine https://www.terraform.io/.
+Install AWS Command line interface https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
+configure your AWS cli
 ```bash
-ng serve
+aws configure
 ```
+
+initialize terraform aws provider in ./iac directory
+```
+terraform init
+```
+
+create infrastructure
+```
+terraform apply
+```
+
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
