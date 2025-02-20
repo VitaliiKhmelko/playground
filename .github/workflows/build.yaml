@@ -20,5 +20,5 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: save artifacts
-          path: /dist/playground
+          path: dist/playground
           retention-days: 3
