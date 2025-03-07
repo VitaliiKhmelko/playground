@@ -11,6 +11,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           run-id: 13728569619
+          github-token: ${{ secrets.GH_PAT }}
+          repository: VitaliiKhmelko/playground
           # Name of the artifact to download.
           # name: webapp-artifacts
 
