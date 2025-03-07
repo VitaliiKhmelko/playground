@@ -1,6 +1,8 @@
 name: Upload artifacts to AWS S3
 
-on: [workflow_dispatch]
+on:
+  release:
+    types: [published]
 
 jobs:
   deploy:
