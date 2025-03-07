@@ -13,6 +13,7 @@ jobs:
           run-id: 13728569619
           github-token: ${{ secrets.GH_PAT }}
           repository: VitaliiKhmelko/playground
+          path: 13728569619
           # Name of the artifact to download.
           # name: webapp-artifacts
 
