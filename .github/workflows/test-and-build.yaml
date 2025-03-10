@@ -30,6 +30,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: webapp-artifacts-${GITHUB_SHA::7}
+          name: webapp-artifacts-${{ github.sha }}
           path: dist/playground
           retention-days: 3
