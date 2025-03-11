@@ -39,6 +39,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: webapp-artifacts-${{ github.sha }}
+          path: .
           retention-days: 3
 
       - name: Configure AWS credentials
