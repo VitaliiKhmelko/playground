@@ -1,4 +1,4 @@
-name: Test and build webapp
+name: 📦 Test and build webapp
 
 on:
   push:
