@@ -9,22 +9,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifacts
+      - name: Get artifacts for the commit
         run: |
           gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/vitaliikhmelko/playground/actions/artifacts?name=webapp-artifacts-${{ github.sha }}
+            /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA
         env:
           GH_TOKEN: ${{ github.token }}
-        # uses: actions/download-artifact@v4
-        # with:
-        #   run-id: 13728569619
-        #   github-token: ${{ secrets.GH_PAT }}
-        #   repository: VitaliiKhmelko/playground
-        #   path: 13728569619
-          # Name of the artifact to download.
-          # name: webapp-artifacts
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          COMMIT_SHA: ${{ github.sha }}
+
+      # - name: Download artifacts
+      #   run: |
+      #     gh api \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H "X-GitHub-Api-Version: 2022-11-28" \
+      #       /repos/vitaliikhmelko/playground/actions/artifacts/ARTIFACT_ID/ARCHIVE_FORMAT
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
