@@ -1,4 +1,5 @@
 name: 📦 Test and build webapp
+run-name: Test and build webapp
 
 on:
   push:
