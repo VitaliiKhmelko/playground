@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: Get artifacts associated with current commit
         run: |
-          artifactId = "$(gh api \
+          gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA)"
+            /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA
 
           echo 'ARTIFACT_ID='$artifactId >> $GITHUB_ENV
         env:
