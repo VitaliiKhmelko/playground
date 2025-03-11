@@ -10,24 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get artifacts for the commit
+      - name: Get artifacts associated with current commit
         run: |
-          gh api \
+          artifactId = "$(gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA
+            /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA)"
+
+          echo 'ARTIFACT_ID='$artifactId >> $GITHUB_ENV
         env:
           GH_TOKEN: ${{ github.token }}
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.repository.name }}
           COMMIT_SHA: ${{ github.sha }}
 
-      # - name: Download artifacts
-      #   run: |
-      #     gh api \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H "X-GitHub-Api-Version: 2022-11-28" \
-      #       /repos/vitaliikhmelko/playground/actions/artifacts/ARTIFACT_ID/ARCHIVE_FORMAT
+      - name: Download artifacts
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
