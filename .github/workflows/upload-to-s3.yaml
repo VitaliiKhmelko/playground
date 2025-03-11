@@ -11,10 +11,7 @@ jobs:
     steps:
       - name: Download artifacts
         run: |
-          gh api
-          -H "Accept: application/vnd.github+json"
-          -H "X-GitHub-Api-Version: 2022-11-28"
-          /repos/vitaliikhmelko/playground/actions/artifacts
+          gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/vitaliikhmelko/playground/actions/artifacts
         # uses: actions/download-artifact@v4
         # with:
         #   run-id: 13728569619
