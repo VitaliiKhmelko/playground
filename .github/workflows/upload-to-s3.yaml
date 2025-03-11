@@ -12,13 +12,13 @@ jobs:
     steps:
       - name: Get artifacts associated with current commit
         run: |
-          artifactId=$(gh api \
+          artifactName=$(gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA \
-            --jq ".artifacts.[0].id")
+            --jq ".artifacts.[0].name")
 
-          echo 'ARTIFACT_ID='$artifactId >> $GITHUB_ENV
+          echo 'ARTIFACT_NAME='$artifactName >> $GITHUB_ENV
         env:
           GH_TOKEN: ${{ github.token }}
           OWNER: ${{ github.repository_owner }}
@@ -27,14 +27,22 @@ jobs:
 
       - name: Download artifacts
         run: |
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip
-        env:
-          GH_TOKEN: ${{ github.token }}
-          OWNER: ${{ github.repository_owner }}
-          REPO: ${{ github.event.repository.name }}
+          gh run download 13795653993
+      #   run: |
+      #     gh api \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H "X-GitHub-Api-Version: 2022-11-28" \
+      #       /repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #     OWNER: ${{ github.repository_owner }}
+      #     REPO: ${{ github.event.repository.name }}
+
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: webapp-artifacts-${{ github.sha }}
+      #     path: dist/playground
+      #     retention-days: 3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
