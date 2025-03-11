@@ -1,5 +1,5 @@
-name: 🚀 Upload artifacts to AWS S3
-run-name: Upload artifacts to AWS S3
+name: Upload artifacts to AWS S3
+run-name: 🚀 Upload artifacts to AWS S3
 
 on: workflow_dispatch
   #release:
