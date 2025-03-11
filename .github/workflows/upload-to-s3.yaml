@@ -27,7 +27,7 @@ jobs:
 
       - name: Download artifacts
         run: |
-          gh run download 2732376205
+          gh run download -n webapp-artifacts-050f00a5c84924d26e3a4f498a961f4642bc9fa9
         env:
           GH_TOKEN: ${{ github.token }}
 
