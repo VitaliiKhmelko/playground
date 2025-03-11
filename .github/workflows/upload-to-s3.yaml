@@ -27,25 +27,19 @@ jobs:
 
       - name: Download artifacts
         run: |
-          gh run download -n webapp-artifacts-050f00a5c84924d26e3a4f498a961f4642bc9fa9
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip
         env:
           GH_TOKEN: ${{ github.token }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
 
-      #   run: |
-      #     gh api \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H "X-GitHub-Api-Version: 2022-11-28" \
-      #       /repos/$OWNER/$REPO/actions/artifacts/$ARTIFACT_ID/zip
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #     OWNER: ${{ github.repository_owner }}
-      #     REPO: ${{ github.event.repository.name }}
-
-      # - uses: actions/upload-artifact@v4
-      #   with:
-      #     name: webapp-artifacts-${{ github.sha }}
-      #     path: dist/playground
-      #     retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: webapp-artifacts-${{ github.sha }}
+          retention-days: 3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
