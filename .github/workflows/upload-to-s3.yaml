@@ -17,7 +17,6 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-050f00a5c84924d26e3a4f498a961f4642bc9fa9 \
-            --jq '.artifacts.[0].archive_download_url'
 
           echo 'ARTIFACT_ID='$artifactId >> $GITHUB_ENV
         env:
