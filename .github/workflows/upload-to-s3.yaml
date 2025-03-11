@@ -16,7 +16,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/$OWNER/$REPO/actions/artifacts?name=webapp-artifacts-$COMMIT_SHA \
-            --jq ".artifacts.[0].name")
+            --jq ".artifacts.[0].id")
 
           echo 'ARTIFACT_ID='$artifactId >> $GITHUB_ENV
         env:
