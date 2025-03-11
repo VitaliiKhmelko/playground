@@ -1,8 +1,8 @@
 name: Upload artifacts to AWS S3
 
-on:
-  release:
-    types: [published]
+on: workflow_dispatch
+  #release:
+   # types: [published]
 
 jobs:
   deploy:
@@ -10,12 +10,17 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          run-id: 13728569619
-          github-token: ${{ secrets.GH_PAT }}
-          repository: VitaliiKhmelko/playground
-          path: 13728569619
+        run: |
+          gh api
+          -H "Accept: application/vnd.github+json"
+          -H "X-GitHub-Api-Version: 2022-11-28"
+          /repos/vitaliikhmelko/playground/actions/artifacts
+        # uses: actions/download-artifact@v4
+        # with:
+        #   run-id: 13728569619
+        #   github-token: ${{ secrets.GH_PAT }}
+        #   repository: VitaliiKhmelko/playground
+        #   path: 13728569619
           # Name of the artifact to download.
           # name: webapp-artifacts
 
